@@ -1,3 +1,4 @@
-import "./x.css";
-console.log(css.toString())
+import "./x.scss";
+import './y.less'
+import './z.styl'
 export default 'xxx' 

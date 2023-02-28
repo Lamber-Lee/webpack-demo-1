@@ -1,39 +1,25 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require("path");
+
+const base = require('./webpack.config.base.js')
 
 module.exports = {
-    mode: 'development',
-    devtool: 'inline-source-map',
+    ...base,
+    devtool: "inline-source-map",
     devServer: {
-        static: './dist',
+        contentBase: "./dist"
     },
-    entry: './src/index.js',
-    output: {
-        filename: 'index.[contenthash].js',
-    },
-    plugins: [new HtmlWebpackPlugin({
-        title: 'Lamber - test',
-        template: 'src/assets/index.html'
-
-    })],
-    plugins: [new MiniCssExtractPlugin({
-        filename: '[name].[contenthash].css',
-        chunkFilename: '[id].[contenthash].css',
-        ignoreOrder: false,
-
-    })],
     module: {
         rules: [
+            ...base.module.rules,
             {
                 test: /\.css$/i,
-                use: ["style-loader", "css-loader"],
-
-            },
-        ],
-    },
+                use: ["style-loader", "css-loader"]
+            }
+        ]
+    }
 };
-
 
 
 
